@@ -1,0 +1,2 @@
+----Placeholder----
+(This setup uses the system prompt defined in the engine directly, so no separate prompt.txt file is needed.)----Placeholder----  Required by Promptfoo but not used; we rely on the engine's system prompt directly.

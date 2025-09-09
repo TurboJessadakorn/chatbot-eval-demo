@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: 'Getting started'
+
+# Optionally set API keys here instead of exporting environment variables.
+# Never commit real keys to source control.
+env:
+  AZURE_API_KEY: ************
+  AZURE_API_HOST: ************.openai.azure.com
+
+prompts:
+  - file://prompt.txt
+
+providers:
+  - id: 'file://provider.py'
+    config:
+      pythonExecutable: /opt/anaconda3/envs/chatbot_eval/bin/python
+
+defaultTest:
+  options:
+    provider: azure:chat:gpt-4o
+
+tests: 
+ - file://test.csv
