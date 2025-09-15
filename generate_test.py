@@ -1,4 +1,3 @@
-import csv
 from enum import Enum
 
 class Rule(Enum):
@@ -30,15 +29,22 @@ test_cases = [
     }
 ]
 
-output_file = "promptfoo_eval.csv"
-
-with open(output_file, mode="w", newline="", encoding="utf-8") as file:
-    writer = csv.writer(file)
-    writer.writerow(["question", "variables", "__expected"])
-    
+def create_tests():
+    results = []
     for case in test_cases:
         template = RULE_TEMPLATES[case["rule"]]
         variables_str = "; ".join(case["variables"].values())
-        writer.writerow([case["question"], variables_str, template])
 
-print(f"CSV file '{output_file}' generated successfully!")
+        results.append({
+            "vars": {
+                "question": case["question"],
+                "variables": variables_str
+            },
+            "assert": [
+                {
+                    "type": "llm-rubric",
+                    "value": template
+                }
+            ]
+        })
+    return results
